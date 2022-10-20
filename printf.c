@@ -19,6 +19,6 @@ int _printf(const char *format, ...)
 	{
 		return (write(1, &format[i], num_args));
 	}
-
+	return (0);
 }
 
