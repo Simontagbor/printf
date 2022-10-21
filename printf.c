@@ -1,6 +1,3 @@
-#include <unistd.h>
-#include <stdarg.h>
-#include <string.h>
 #include "main.h"
 
 /**
@@ -12,13 +9,30 @@
 int _printf(const char *format, ...)
 {
 	int i;
+
 	int num_args = strlen(format);
+
 	va_list args;
+
 	va_start(args, format);
+
 	for (i = 0; i < num_args; i++)
 	{
-		return (write(1, &format[i], num_args));
+
+		if (*(format + i) == '%')
+		{
+
+			converter(format + ++i)(args);
+
+		}
+		else
+
+		{
+
+			write(1, format + i, 1);
+
+		}
+
 	}
 	return (0);
 }
-
