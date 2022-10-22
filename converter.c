@@ -15,7 +15,7 @@ void (*converter(const char *symbol))(va_list list)
 	format_me func[] = {
 
 		{"c", print_c},
-
+		{"s", print_s}
 	};
 
 	int i;
