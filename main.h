@@ -23,4 +23,5 @@ void print_c(va_list list);
 void print_s(va_list list);
 void print_d(va_list list);
 void print_i(va_list list);
+int _write_char(char c);
 #endif
