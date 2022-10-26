@@ -11,24 +11,45 @@
 void (*converter(const char *symbol))(va_list list)
 
 {
+	int i, j, r_val, length;
 
-	format_me func[] = {
+	format_me f_list[] = {
 
 		{"c", print_c},
 		{"s", print_s}
 	};
-
-	int i;
-
-	for (i = 0; i < 4; i++)
+	length = 0;
+	for (i = 0; format[i] != '\0'; i++)/* Iterates through the main str*/
 	{
-
-		if (*symbol == *(func[i].letter))
-
-			return (func[i].f);
+		if (format[i] == '%') /*Checks for format specifiers*/
+		{
+			/*Iterates through struct to find the right func*/
+			for (j = 0; f_list[j].sym != NULL; j++)
+			{
+				if (format[i + 1] == f_list[j].sym[0])
+				{
+					r_val = f_list[j].f(list);
+					if (r_val == -1)
+						return (-1);
+					length += r_val;
+					break;
+				}
+			}
+			if (f_list[j].sym == NULL && format[i + 1] != ' ')
+			{
+				if (format[i + 1] != '\0')
+				{
+					length = length + 2;
+				}
+				else
+					return (-1);
+			}
+			i = i + 1; /*Updating i to skip format symbols*/
+		}
+		else
+		{
+			length++;
+		}
 	}
-
-	write(2, "Symbol not found", 17);
-	exit(1);
-
+	return (length);
 }

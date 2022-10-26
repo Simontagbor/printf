@@ -9,30 +9,23 @@
 int _printf(const char *format, ...)
 {
 	int i;
-
+	int length = 0;
 	int num_args = strlen(format);
-
 	va_list args;
 
 	va_start(args, format);
-
 	for (i = 0; i < num_args; i++)
 	{
-
 		if (*(format + i) == '%')
 		{
-
 			converter(format + ++i)(args);
-
 		}
 		else
-
 		{
-
 			write(1, format + i, 1);
-
 		}
-
 	}
-	return (0);
+	length = converter(format, args);
+	va_end(args);
+	return (length);
 }
