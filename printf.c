@@ -34,5 +34,7 @@ int _printf(const char *format, ...)
 		}
 
 	}
-	return (0);
+	length = converter(format, args);
+	va_end(args);
+	return (length);
 }
