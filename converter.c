@@ -12,7 +12,9 @@ void (*converter(const char *symbol))(va_list list)
 
 {
 	int i, j, r_val, length;
-	format_me func[] = {
+  
+  format_me func[] = {
+
 		{"c", print_c},
 		{"s", print_s}
 	};
@@ -22,6 +24,7 @@ void (*converter(const char *symbol))(va_list list)
 		if (format[i] == '%') /*Checks for format specifiers*/
 		{
 			/*Iterates through struct to find the right func*/
+
 			for (j = 0; func[j].sym != NULL; j++)
 			{
 				if (format[i + 1] == func[j].sym[0])
@@ -43,6 +46,7 @@ void (*converter(const char *symbol))(va_list list)
 				{
 				return (-1);
 				}
+
 			}
 			i = i + 1; /*Updating i to skip format symbols*/
 		}
