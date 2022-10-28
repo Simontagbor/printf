@@ -9,7 +9,7 @@
 int _printf(const char *format, ...)
 {
 	int i;
-
+	int length;
 	int num_args = strlen(format);
 
 	va_list args;
@@ -22,7 +22,7 @@ int _printf(const char *format, ...)
 		if (*(format + i) == '%')
 		{
 
-			converter(format + ++i)(args);
+			converter(format, args);
 
 		}
 		else

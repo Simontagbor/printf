@@ -6,7 +6,7 @@
  * Return: void
  */
 
-void print_s(va_list list)
+int print_s(va_list list)
 {
 	int i;
 	char *str;
@@ -14,4 +14,5 @@ void print_s(va_list list)
 	str = va_arg(list, char *);
 	for (i = 0; str[i] != '\0'; i++)
 		_write_char(str[i]);
+	return(i);
 }

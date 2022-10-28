@@ -8,8 +8,7 @@
 
 
 
-void (*converter(const char *symbol))(va_list list)
-
+int converter(const char *format, va_list list)
 {
 	int i, j, r_val, length;
 	format_me func[] = {
@@ -22,32 +21,33 @@ void (*converter(const char *symbol))(va_list list)
 		if (format[i] == '%') /*Checks for format specifiers*/
 		{
 			/*Iterates through struct to find the right func*/
-			for (j = 0; func[j].sym != NULL; j++)
+			for (j = 0; func[j].letter != NULL; j++)
 			{
-				if (format[i + 1] == func[j].sym[0])
+				if (format[i + 1] == func[j].letter[0])
 				{
-				r_val = func[j].f(list);
-				if (r_val == -1)
-				return (-1);
-				length += r_val;
-				break;
+					r_val = func[j].f(list);
+					if (r_val == -1)
+						return (-1);
+					length += r_val;
+					break;
 				}
 			}
-			if (func[j].sym == NULL && format[i + 1] != ' ')
+			if (func[j].letter == NULL && format[i + 1] != ' ')
 			{
 				if (format[i + 1] != '\0')
 				{
-				length = length + 2;
+					length = length + 2;
 				}
 				else
 				{
-				return (-1);
+					return (-1);
 				}
 			}
 			i = i + 1; /*Updating i to skip format symbols*/
 		}
 		else
 		{
+			_write_char(format[i]);
 			length++;
 		}
 	}
