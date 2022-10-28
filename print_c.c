@@ -6,7 +6,7 @@
  * Return: void
  */
 
-void print_c(va_list list)
+int print_c(va_list list)
 {
 
 	char *ch_point;
@@ -15,5 +15,6 @@ void print_c(va_list list)
 	ch = va_arg(list, int);
 	ch_point = &ch;
 	write(1, ch_point, 1);
+	return(1);
 }
 

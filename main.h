@@ -9,19 +9,21 @@
  * header file: main.h
  */
 
-int _printf(const char *format, ...);
-
-typedef struct formatter {
+struct formatter {
 	char * letter;
 	void (*f)(va_list list);
 
-} format_me;
+};
+typedef struct formatter format_me;
+
+/*Prototype of printf function*/
+int _printf(const char *format, ...);
 
 /* Prototype for convertor function */
-void (*converter(const char *))(va_list list);
-void print_c(va_list list);
-void print_s(va_list list);
-void print_d(va_list list);
-void print_i(va_list list);
+int converter(const char *format, va_list list);
+int print_c(va_list list);
+int print_s(va_list list);
+int print_d(va_list list);
+int print_i(va_list list);
 int _write_char(char c);
 #endif
